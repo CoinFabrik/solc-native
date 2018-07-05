@@ -4,6 +4,7 @@
 	"description": "NodeJS binding for native solidity compiler",
 	"main": "./index.js",
 	"scripts": {
+		"test": "node tests/test.js",
 		"postinstall": "node scripts/install.js",
 		"preuninstall": "node scripts/uninstall.js"
 	},

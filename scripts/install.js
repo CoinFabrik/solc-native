@@ -13,24 +13,11 @@ var unzip = require("unzip");
 
 var nativeCompilerFolder = path.resolve(__dirname, '../native_compiler');
 
-var package = '';
-if (process.platform == 'win32') {
-	package = 'solidity-windows.zip';
-}
-else if (process.platform == 'linux') {
-	package = 'solc-static-linux';
-}
-else {
-	console.log("Error: Unsupported platform.");
-	process.exit(1);
-}
-
 createNativeSolcFolder().then(() => {
 	return getLastestCompilerVersionUrl();
 }).then((url) => {
 	return downloadNativeCompiler(url);
-}).then((url) => {
-
+}).then(() => {
 	process.exit(0);
 }).catch((err) => {
 	console.log(err.toString());
@@ -87,6 +74,17 @@ function deleteFolder(path)
 function getLastestCompilerVersionUrl()
 {
 	return new Promise((resolve, reject) => {
+		var package;
+
+		if (process.platform == 'win32') {
+			package = 'solidity-windows.zip';
+		}
+		else if (process.platform == 'linux') {
+			package = 'solc-static-linux';
+		}
+		else {
+			reject(new Error("Unsupported platform"));
+		}
 		request({
 			url: "https://api.github.com/repos/ethereum/solidity/releases/latest",
 			headers: {
@@ -123,12 +121,39 @@ function getLastestCompilerVersionUrl()
 function downloadNativeCompiler(url)
 {
 	return new Promise((resolve, reject) => {
-		request(url).pipe(unzip.Extract({
-			path: nativeCompilerFolder
-		})).on('close', function () {
-			resolve();
-		}).on('error', function (err) {
-			reject(err);
-		});
+		if (process.platform == 'win32') {
+			request(url).pipe(unzip.Extract({
+				path: nativeCompilerFolder
+			})).on('close', function () {
+				resolve();
+			}).on('error', function (err) {
+				reject(err);
+			});
+		}
+		else if (process.platform == 'linux') {
+			request(url, { encoding: 'binary' }, function(err, response, body) {
+				if (!err) {
+					fs.writeFile(nativeCompilerFolder + '/solc', body, 'binary', function (err) {
+						if (!err) {
+							fs.chmod(nativeCompilerFolder + '/solc', "755", function (err) {
+								if (!err)
+									resolve();
+								else
+									reject(err);
+							});
+						}
+						else {
+							reject(err);
+						}
+					});
+				}
+				else {
+					reject(err);
+				}
+			});
+		}
+		else {
+			reject(new Error("Unsupported platform"));
+		}
 	});
 }
