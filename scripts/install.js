@@ -123,10 +123,8 @@ function getLastestCompilerVersionUrl()
 function downloadNativeCompiler(url)
 {
 	return new Promise((resolve, reject) => {
-		var folder = path.resolve(__dirname, '../XXX');
-
 		request(url).pipe(unzip.Extract({
-			path: folder
+			path: nativeCompilerFolder
 		})).on('close', function () {
 			resolve();
 		}).on('error', function (err) {
