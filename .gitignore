@@ -1,0 +1,7 @@
+*.~*
+package-lock.json
+.vscode/
+node_modules/
+native_compiler/
+tmp/
+tests/build/
