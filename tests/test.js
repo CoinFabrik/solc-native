@@ -16,7 +16,7 @@ compiler.compile({
 	files : [
 		__dirname + path.sep + 'SampleToken.sol'
 	]
-}).then((output, errors) => {
+}).then((ret) => {
 	var s = __dirname + path.sep + 'build';
 	try {
 		fs.mkdirSync(s);
@@ -24,7 +24,9 @@ compiler.compile({
 	catch (err)
 	{ }
 	try {
-		fs.writeFileSync(s + path.sep + "output.json", JSON.stringify(output, null, 2));
+		fs.writeFileSync(s + path.sep + "output.json", JSON.stringify(ret.output, null, 2));
+
+		console.log("Compilation succeeded!");
 	}
 	catch (err)
 	{

@@ -266,7 +266,10 @@ module.exports.compile = function (options)
 				return;
 			}
 		}
-		resolve(output, errors);
+		resolve({
+			output: output,
+			errors: errors
+		});
 	});
 }
 
