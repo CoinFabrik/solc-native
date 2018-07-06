@@ -205,7 +205,11 @@ module.exports.compile = function (options)
 								}
 
 								obj = {};
+								obj.contractName = contractNames[cn_idx];
 								obj.bytecode = bytecode;
+								obj.compiler = {};
+								obj.compiler.name = "solc";
+								obj.compiler.version = module.exports.version();
 
 								try {
 									metadata = JSON.parse(contract.metadata);
@@ -229,6 +233,7 @@ module.exports.compile = function (options)
 								if (typeof metadata.output.userdoc === 'object') {
 									obj.userdoc = metadata.output.userdoc;
 								}
+
 								//store contract data
 								output[contractNames[cn_idx]] = obj;
 							}
