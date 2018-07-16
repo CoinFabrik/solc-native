@@ -12,7 +12,7 @@
 		"solidity"
 	],
 	"author": "Mauro H. Leggieri",
-	"email": "mxmauro [at] mauroleggieri [dot] com",
+	"email": "mauro.leggieri [at] coinfabrik [dot] com",
 	"url": "https://github.com/CoinFabrik/solc-native",
 	"license": "MIT",
 	"dependencies": {
