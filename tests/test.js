@@ -1,11 +1,3 @@
-/**
- * [solc-native]{@link https://github.com/CoinFabrik/solc-native}
- *
- * @version 1.0.0
- * @author Mauro H. Leggieri
- * @copyright CoinFabrik, 2018
- * @license MIT
- */
 var compiler = require("../index.js");
 const path = require('path');
 const fs = require('fs');
