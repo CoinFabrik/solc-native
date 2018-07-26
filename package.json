@@ -1,6 +1,6 @@
 {
 	"name": "solc-native",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "NodeJS binding for native solidity compiler",
 	"main": "./index.js",
 	"scripts": {
@@ -8,13 +8,21 @@
 		"postinstall": "node scripts/install.js",
 		"preuninstall": "node scripts/uninstall.js"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CoinFabrik/solc-native.git"
+	},
 	"keywords": [
-		"solidity"
+		"solidity",
+		"ethereum",
+		"compiler"
 	],
 	"author": "Mauro H. Leggieri",
-	"email": "mauro.leggieri [at] coinfabrik [dot] com",
-	"url": "https://github.com/CoinFabrik/solc-native",
 	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/CoinFabrik/solc-native/issues"
+	},
+	"homepage": "https://github.com/CoinFabrik/solc-native",
 	"dependencies": {
 		"object-hash": "^1.3.0",
 		"request": "^2.87.0",
