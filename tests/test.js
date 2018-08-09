@@ -5,9 +5,7 @@ const fs = require('fs');
 console.log("Compiler version: " + compiler.version());
 
 compiler.compile({
-	files : [
-		__dirname + path.sep + 'SampleToken.sol'
-	]
+	file : __dirname + path.sep + 'SampleToken.sol'
 }).then((ret) => {
 	var s = __dirname + path.sep + 'build';
 	try {
