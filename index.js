@@ -187,6 +187,7 @@ module.exports.compile = function (options)
 							obj.compiler = {};
 							obj.compiler.name = "solc";
 							obj.compiler.version = module.exports.version();
+							obj.sourceFile = contractFiles[cf_idx];
 
 							try {
 								metadata = JSON.parse(contract.metadata);
